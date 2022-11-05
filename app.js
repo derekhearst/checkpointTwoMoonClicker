@@ -34,7 +34,7 @@ const automaticUpgrades = [
 
 let allUpgrades = automaticUpgrades.concat(clickUpgrades)
 
-let money = 5000
+let money = 0
 
 let highScore = 0
 
