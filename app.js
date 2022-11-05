@@ -191,7 +191,7 @@ function drawPower() {
 	let minePower = document.getElementById("clickPower")
 	let autoPower = document.getElementById("autoPower")
 
-	let mpower = 0
+	let mpower = 1
 	let apower = 0
 	allUpgrades.forEach(u => {
 		if (u.click) {
