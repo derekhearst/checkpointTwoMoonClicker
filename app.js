@@ -13,6 +13,14 @@ const clickUpgrades = [
 		multiplier: 5,
 		click: true,
 	}
+	,
+	{
+		name: 'super-drill',
+		price: 500,
+		quantity: 0,
+		multiplier: 10,
+		click: true,
+	}
 ];
 
 const automaticUpgrades = [
@@ -28,6 +36,14 @@ const automaticUpgrades = [
 		price: 5000,
 		quantity: 0,
 		income: 100,
+		click: false,
+	}
+	,
+	{
+		name: 'Death Star',
+		price: 10000,
+		quantity: 0,
+		income: 1000,
 		click: false,
 	}
 ];
@@ -87,6 +103,7 @@ function drawUpgrades() {
 	let autoUpgradeSection = document.getElementById("autoUpgradeSection")
 	clickTemplate = ''
 	clickUpgrades.forEach((u) => {
+
 		let displayPrice = u.price / 1000 <= 1 ? `${u.price}` : `${u.price / 1000}k`
 		if (u.price <= money) {
 			clickTemplate +=
