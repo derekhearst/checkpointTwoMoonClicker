@@ -68,11 +68,7 @@ function load() {
 		money = JSON.parse(localStorage.getItem("money"))
 	}
 
-	if (localStorage.getItem("highScore") == null) {
-		localStorage.setItem("highScore", JSON.stringify(highScore))
-	} else {
-		highScore = JSON.parse(localStorage.getItem("highScore"))
-	}
+
 
 	drawMoney()
 	drawPower()
@@ -83,8 +79,13 @@ function load() {
 function save() {
 	localStorage.setItem("itemsOwned", JSON.stringify(allUpgrades))
 	localStorage.setItem("money", JSON.stringify(money))
-	localStorage.setItem("highScore", JSON.stringify(highScore))
 
+}
+// Load High Score always
+if (localStorage.getItem("highScore") == null) {
+	localStorage.setItem("highScore", JSON.stringify(highScore))
+} else {
+	highScore = JSON.parse(localStorage.getItem("highScore"))
 }
 
 
@@ -202,6 +203,8 @@ function drawMoney() {
 	moneyElm.innerText = money
 	if (money > highScore) {
 		highScore = money
+		localStorage.setItem("highScore", JSON.stringify(highScore))
+
 	}
 	drawHighScore()
 	drawUpgrades()
