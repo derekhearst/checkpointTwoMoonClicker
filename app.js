@@ -102,17 +102,20 @@ function drawUpgrades() {
 	let clickUpgradeSection = document.getElementById("clickUpgradeSection")
 	let autoUpgradeSection = document.getElementById("autoUpgradeSection")
 	clickTemplate = ''
-	clickUpgrades.forEach((u) => {
+	allUpgrades.forEach((u) => {
+		if (u.click) {
 
-		let displayPrice = u.price / 1000 <= 1 ? `${u.price}` : `${u.price / 1000}k`
-		if (u.price <= money) {
-			clickTemplate +=
+
+			let displayPrice = u.price / 1000 <= 1 ? `${u.price}` : `${u.price / 1000}k`
+			if (u.price <= money) {
+				clickTemplate +=
+					`
+				<div class="upgrade">
+				<button onclick="buyItem('${u.name}')">${displayPrice} <i class="mdi mdi-cheese"></i></button>
+				<div class="upgradeText">${u.name} +${u.multiplier}</div>
+				</div>
 				`
-			<div class="upgrade">
-			<button onclick="buyItem('${u.name}')">${displayPrice} <i class="mdi mdi-cheese"></i></button>
-			<div class="upgradeText">${u.name} +${u.multiplier}</div>
-			</div>
-			`
+			}
 		}
 	})
 	if (clickTemplate == '') {
@@ -122,16 +125,18 @@ function drawUpgrades() {
 
 
 	autoTemplate = ''
-	automaticUpgrades.forEach((u) => {
+	allUpgrades.forEach((u) => {
 		let displayPrice = u.price / 1000 < 1 ? `${u.price}` : `${u.price / 1000}k`
 		if (u.price <= money) {
-			autoTemplate +=
+			if (!u.click) {
+				autoTemplate +=
+					`
+				<div class="upgrade">
+				<button onclick="buyItem('${u.name}')">${displayPrice} <i class="mdi mdi-cheese"></i></button>
+				<div class="upgradeText">${u.name} +${u.income}</div>
+				</div>
 				`
-			<div class="upgrade">
-			<button onclick="buyItem('${u.name}')">${displayPrice} <i class="mdi mdi-cheese"></i></button>
-			<div class="upgradeText">${u.name} +${u.income}</div>
-			</div>
-			`
+			}
 		}
 	})
 	if (autoTemplate == '') {
@@ -149,7 +154,7 @@ function drawStats() {
 
 	let clickTemplate = '', autoTemplate = ''
 
-	clickUpgrades.forEach(u => {
+	allUpgrades.forEach(u => {
 		if (u.click) {
 			clickTemplate +=
 				`
@@ -169,7 +174,7 @@ function drawStats() {
 
 	clickStatsSectionElm.innerHTML = clickTemplate
 
-	automaticUpgrades.forEach(u => {
+	allUpgrades.forEach(u => {
 		if (!u.click) {
 			autoTemplate +=
 				`
